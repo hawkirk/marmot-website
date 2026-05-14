@@ -17,10 +17,8 @@ import Footer from '../components/Footer.astro';
     <section class="hero-shot">
       <div class="hero-shot__inner">
         <Screenshot
-          windowTitle="Untitled Manuscript — Marmot"
-          placeholderLabel="The editor at work"
-          placeholderHint="Drop your hero screenshot here · 2560 × 1600 recommended"
-          aspectRatio="16/10"
+          src="/screenshots/hero.png"
+          aspectRatio="3680/2390"
           alt="Marmot editor showing a manuscript in progress"
         />
       </div>
@@ -28,31 +26,30 @@ import Footer from '../components/Footer.astro';
 
     <Spotlight
       eyebrow="Write"
-      title="Just text. Just you."
-      body="Marmot's editor is built for the kind of attention long-form writing demands. Inline syntax markers, no toolbars, no chrome — just your prose."
+      title="Write without distraction."
+      body="Marmot's editor is built to get out of your way as you write. Inline syntax markers, no toolbars, no chrome — just your prose."
       bullets={[
-        'Optional focus mode dims everything but the sentence you are writing.',
+        'Toggle focus mode to dim everything but the current sentence.',
         'Smart typography handles em-dashes, smart quotes, and ellipses as you type.',
-        'Native NSTextView under the hood — no input lag at chapter or novel length.',
+        'Optimized for performance — write in projects with hundreds of thousands of words lag-free.',
       ]}
-      windowTitle="chapter-03.md — Marmot"
-      placeholderLabel="Editor view"
-      placeholderHint="Focus mode active — show one paragraph dimmed, the active sentence lit"
+      src="/screenshots/editor.png"
+      alt="Marmot editor in focus mode, with one sentence highlighted and surrounding paragraphs dimmed"
+      aspectRatio="2528/2394"
       imageSide="right"
     />
 
     <Spotlight
       eyebrow="Read"
-      title="See your prose like a finished book."
-      body="Switch to reader mode any time to see your manuscript typeset like the printed page. Pacing problems and dense paragraphs surface before your editor finds them."
+      title="Read your prose as finished book."
+      body="Switch to reader mode any time to see your manuscript typeset like the printed page. Identify pacing problems and dense paragraphs before your editor finds them."
       bullets={[
-        'Beautiful typographic defaults — serif, generous leading, balanced measure.',
+        'Choose between three custom viewing styles.',
         'Skim whole chapters or zoom in on a single page.',
-        'Search and navigate without leaving the typeset view.',
       ]}
-      windowTitle="Chapter Three — Reader Mode"
-      placeholderLabel="Reader / preview"
-      placeholderHint="Typeset chapter view — show two columns or a single page mock"
+      src="/screenshots/reader.png"
+      alt="Marmot in reader mode, showing a typeset chapter on the page"
+      aspectRatio="1952/2394"
       imageSide="left"
       background="sunken"
     />
@@ -60,15 +57,15 @@ import Footer from '../components/Footer.astro';
     <Spotlight
       eyebrow="Send"
       title="Submission-ready, instantly."
-      body="When the book is done, Marmot exports a clean Shunn-formatted PDF — the standard for novel submissions to agents and publishers. One click. No formatting headaches."
+      body="One-click exports in industry standard manuscript formats, ready to submit to agents and publishers."
       bullets={[
-        'Title page, headers, page numbers — all formatted to Shunn spec.',
-        'Courier or Times New Roman, your choice. Both are accepted by editors.',
-        'Export individual chapters or the entire manuscript as one PDF.',
+        'Export as PDF or DOCX.',
+        'Select and customize three unique export styles.',
+        'Export individual chapters or the entire manuscript as one file.',
       ]}
-      windowTitle="Compile — Shunn Manuscript Format"
-      placeholderLabel="Compile / export"
-      placeholderHint="Compile dialog with PDF preview alongside"
+      src="/screenshots/export-manuscript.png"
+      alt="A page of a Shunn-formatted manuscript PDF exported from Marmot"
+      aspectRatio="1952/2394"
       imageSide="right"
     />
 
@@ -87,7 +84,6 @@ import Footer from '../components/Footer.astro';
         </header>
         <div class="detail-shot__viewer">
           <Screenshot
-            windowTitle="~/Manuscripts/the-northern-light"
             placeholderLabel="Manuscript on disk"
             placeholderHint="Finder window showing the folder of .md files alongside the Marmot editor"
             aspectRatio="21/9"

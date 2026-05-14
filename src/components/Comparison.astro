@@ -4,28 +4,24 @@ type Cell = boolean | string | null;
 interface Row {
   feature: string;
   marmot: Cell;
-  ulysses: Cell;
-  scrivener: Cell;
-  iaWriter: Cell;
+  other_apps: Cell;
 }
 
 // Placeholder content — edit these rows freely.
 const rows: Row[] = [
-  { feature: 'Files stored as plain Markdown',     marmot: true,  ulysses: false, scrivener: false, iaWriter: true  },
-  { feature: 'No account or sign-in required',     marmot: true,  ulysses: false, scrivener: true,  iaWriter: true  },
-  { feature: 'Works fully offline',                marmot: true,  ulysses: true,  scrivener: true,  iaWriter: true  },
-  { feature: 'One-time purchase (no subscription)',marmot: true,  ulysses: false, scrivener: true,  iaWriter: true  },
-  { feature: 'Shunn manuscript PDF export',        marmot: true,  ulysses: false, scrivener: true,  iaWriter: false },
-  { feature: 'Built specifically for novels',      marmot: true,  ulysses: false, scrivener: true,  iaWriter: false },
-  { feature: 'Native macOS app (not Electron)',    marmot: true,  ulysses: true,  scrivener: true,  iaWriter: true  },
-  { feature: 'Zero telemetry',                     marmot: true,  ulysses: false, scrivener: '—',   iaWriter: '—'   },
+  { feature: 'Files stored as plain Markdown',     marmot: true,  other_apps: false  },
+  { feature: 'No account or sign-in required',     marmot: true,  other_apps: false  },
+  { feature: 'Works fully offline',                marmot: true,  other_apps: true  },
+  { feature: 'One-time purchase (no subscription)',marmot: true,  other_apps: false  },
+  { feature: 'Shunn manuscript PDF export',        marmot: true,  other_apps: false },
+  { feature: 'Built specifically for novels',      marmot: true,  other_apps: false },
+  { feature: 'Native macOS app (not Electron)',    marmot: true,  other_apps: true  },
+  { feature: 'Zero telemetry',                     marmot: true,  other_apps: false },
 ];
 
 const apps = [
   { key: 'marmot',    name: 'Marmot',     highlight: true  },
-  { key: 'ulysses',   name: 'Ulysses',    highlight: false },
-  { key: 'scrivener', name: 'Scrivener',  highlight: false },
-  { key: 'iaWriter',  name: 'iA Writer',  highlight: false },
+  { key: 'other_apps',   name: 'Other Apps',    highlight: false },
 ] as const;
 
 function renderCell(value: Cell): { symbol: string; label: string; tone: 'yes' | 'no' | 'neutral' } {

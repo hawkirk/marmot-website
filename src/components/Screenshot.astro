@@ -4,8 +4,6 @@ interface Props {
   src?: string;
   alt?: string;
   caption?: string;
-  /** Filename or label shown in the centered title bar of the window chrome. */
-  windowTitle?: string;
   /** CSS aspect-ratio value, e.g. "16/10", "4/3", "21/9". */
   aspectRatio?: string;
   /** Label shown inside the placeholder card. Describes what kind of screenshot belongs here. */
@@ -19,7 +17,6 @@ const {
   src,
   alt = 'Marmot screenshot',
   caption,
-  windowTitle,
   aspectRatio = '16/10',
   placeholderLabel = 'Screenshot',
   placeholderHint,
@@ -29,15 +26,6 @@ const {
 
 <figure class:list={['screenshot', className]}>
   <div class="window">
-    <div class="window__bar">
-      <span class="window__dots" aria-hidden="true">
-        <span class="window__dot window__dot--red"></span>
-        <span class="window__dot window__dot--yellow"></span>
-        <span class="window__dot window__dot--green"></span>
-      </span>
-      <span class="window__title">{windowTitle}</span>
-      <span class="window__bar-end" aria-hidden="true"></span>
-    </div>
     <div class="window__content" style={`aspect-ratio: ${aspectRatio}`}>
       {src ? (
         <img src={src} alt={alt} loading="lazy" decoding="async" />
@@ -64,77 +52,7 @@ const {
     margin: 0;
   }
 
-  .window {
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow:
-      0 2px 4px -2px color-mix(in srgb, var(--ink) 6%, transparent),
-      0 24px 56px -24px color-mix(in srgb, var(--ink) 18%, transparent);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .window {
-      box-shadow:
-        0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent),
-        0 30px 70px -24px rgba(0, 0, 0, 0.55);
-    }
-  }
-
-  .window__bar {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    padding: 10px 14px;
-    background: var(--surface-sunken);
-    border-bottom: 1px solid var(--rule);
-    min-height: 36px;
-    gap: var(--space-3);
-  }
-
-  .window__dots {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    justify-self: start;
-  }
-
-  .window__dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    display: block;
-  }
-
-  .window__dot--red    { background: #FF5F57; }
-  .window__dot--yellow { background: #FEBC2E; }
-  .window__dot--green  { background: #28C840; }
-
-  @media (prefers-color-scheme: dark) {
-    .window__dot--red    { background: #C9483B; }
-    .window__dot--yellow { background: #C99319; }
-    .window__dot--green  { background: #289C36; }
-  }
-
-  .window__title {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: -0.005em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: none;
-    text-align: center;
-  }
-
-  .window__bar-end {
-    justify-self: end;
-  }
-
   .window__content {
-    background: var(--paper);
     position: relative;
     overflow: hidden;
   }

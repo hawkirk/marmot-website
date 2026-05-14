@@ -21,9 +21,6 @@ export const APP_STORE = {
 } as const;
 
 export const NAV_LINKS = [
-  { href: '/changelog', label: 'Changelog' },
-  { href: '/guide', label: 'Guide' },
-  { href: '/blog', label: 'Blog' },
   { href: '/help', label: 'Help' },
 ] as const;
 

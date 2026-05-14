@@ -8,12 +8,13 @@ interface Props {
   bullets?: string[];
   src?: string;
   alt?: string;
-  windowTitle?: string;
   imageSide?: 'left' | 'right';
   background?: 'paper' | 'sunken';
   placeholderLabel?: string;
   placeholderHint?: string;
   aspectRatio?: string;
+  /** Give the image more space (image ~70% of width instead of ~58%). */
+  wide?: boolean;
 }
 
 const {
@@ -23,19 +24,19 @@ const {
   bullets = [],
   src,
   alt,
-  windowTitle,
   imageSide = 'right',
   background = 'paper',
   placeholderLabel,
   placeholderHint,
   aspectRatio,
+  wide = false,
 } = Astro.props;
 
 const headingId = `spotlight-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}`;
 ---
 
 <section
-  class:list={['spotlight', 'section', `spotlight--image-${imageSide}`, `spotlight--${background}`]}
+  class:list={['spotlight', 'section', `spotlight--image-${imageSide}`, `spotlight--${background}`, wide && 'spotlight--wide']}
   aria-labelledby={headingId}
 >
   <div class="container spotlight__grid">
@@ -53,7 +54,6 @@ const headingId = `spotlight-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').s
       <Screenshot
         src={src}
         alt={alt}
-        windowTitle={windowTitle}
         placeholderLabel={placeholderLabel}
         placeholderHint={placeholderHint}
         aspectRatio={aspectRatio}
@@ -83,6 +83,18 @@ const headingId = `spotlight-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').s
     .spotlight__grid {
       grid-template-columns: 5fr 7fr;
       gap: var(--space-8);
+    }
+
+    .spotlight--wide .spotlight__grid {
+      grid-template-columns: 1fr 2.4fr;
+    }
+
+    .spotlight--image-left .spotlight__grid {
+      grid-template-columns: 7fr 5fr;
+    }
+
+    .spotlight--image-left.spotlight--wide .spotlight__grid {
+      grid-template-columns: 2.4fr 1fr;
     }
 
     .spotlight--image-left .spotlight__image {
