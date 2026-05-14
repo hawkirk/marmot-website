@@ -6,7 +6,7 @@ export const SITE = {
   name: 'Marmot',
   domain: 'marmotmanuscript.com',
   url: 'https://marmotmanuscript.com',
-  tagline: 'A quiet place to write your novel.',
+  tagline: 'Write your novel in pure markdown.',
   description:
     'A minimalist macOS app for writing novels. Plain Markdown files, distraction-free editor, one-click submission-ready PDFs in Shunn manuscript format.',
   supportEmail: 'hello@marmotmanuscript.com',

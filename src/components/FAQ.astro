@@ -2,31 +2,35 @@
 const faqs = [
   {
     q: 'How much does Marmot cost?',
-    a: 'Marmot is a one-time purchase on the Mac App Store. No subscription. Pricing will be announced at launch.',
+    a: 'Marmot is available on the Mac App Store for a one-time purchase of $4.99 USD. No subscription or in-app purchases.',
   },
   {
-    q: 'What are the system requirements?',
-    a: 'Marmot runs on macOS 14 Sonoma or later, on both Apple Silicon and Intel Macs. There is no iOS or iPad version yet.',
-  },
-  {
-    q: 'Where are my manuscripts stored?',
-    a: 'On your Mac, in a folder you choose. Each manuscript is a directory of plain Markdown (.md) files with an optional marmot.json manifest. You can open the same files in any Markdown editor or version-control system.',
+    q: 'Is Marmot available on iOS/iPadOS/Web/Windows?',
+    a: 'At this time, Marmot is a Mac-only app. Marmot runs on macOS 14 Sonoma or later, on both Apple Silicon and Intel Macs.',
   },
   {
     q: 'Does Marmot sync between my devices?',
     a: 'Marmot does not include built-in sync. By design — sync engines are a common source of data loss and frustration. Instead, put your manuscript folder in iCloud Drive, Dropbox, or a Git repository and let the tool you already trust handle it.',
   },
+    {
+    q: 'Where are my manuscripts stored?',
+    a: 'On your Mac, in a folder you choose. Each manuscript is a directory of plain Markdown (.md) files with a marmot.json and order.txt manifest that store metadata about your novel. You can open the same files in any Markdown editor or version-control system.',
+  },
   {
-    q: 'Can I export to Word, ePub, or other formats?',
-    a: 'Version 1 ships with PDF export in Shunn manuscript format (the standard for submitting novels to agents and publishers). Other export formats are being considered for a future update.',
+    q: 'What formats can I export my novel in?',
+    a: "Marmot currently supports exports in PDF and DOCX format, with export styles you can customize to your liking. If you want to convert your novel to EPUB, Marmot's built-in 'Simple' export theme creates a neatly formatted DOCX output that can be easily ported to dedicated EPUB formatting apps such as Atticus or Vellum.",
   },
   {
     q: 'Does Marmot collect any data?',
     a: 'No. Marmot has no analytics, no telemetry, no crash reporting service, and no account system. It does not make any network requests on your behalf.',
   },
   {
-    q: 'How do I report a bug or request a feature?',
-    a: 'Email hello@marmotmanuscript.com with what you saw and what you expected. Replies usually come within a day or two.',
+    q: 'How can I report a bug or request a feature?',
+    a: 'Yes! Please email hello@marmotmanuscript.com with any questions, bug reports, or feature requests.',
+  },
+  {
+    q: 'Why is it called Marmot?',
+    a: "Marmots hibernate for nine months out of the year. It is widely believed they spend that time writing novels, though this is the subject of much debate within the Marmotological community.",
   },
 ];
 ---
@@ -34,8 +38,8 @@ const faqs = [
 <section class="faq section" id="faq" aria-labelledby="faq-heading">
   <div class="container faq__container">
     <header class="faq__header">
-      <p class="eyebrow">Questions</p>
-      <h2 id="faq-heading">Things people ask.</h2>
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
     </header>
 
     <div class="faq__list">

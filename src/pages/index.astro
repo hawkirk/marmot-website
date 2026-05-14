@@ -4,7 +4,6 @@ import Hero from '../components/Hero.astro';
 import Screenshot from '../components/Screenshot.astro';
 import Spotlight from '../components/Spotlight.astro';
 import Features from '../components/Features.astro';
-import Philosophy from '../components/Philosophy.astro';
 import Comparison from '../components/Comparison.astro';
 import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
@@ -71,29 +70,6 @@ import Footer from '../components/Footer.astro';
 
     <Features />
 
-    <section class="detail-shot section--tight">
-      <div class="container detail-shot__inner">
-        <header class="detail-shot__header">
-          <p class="eyebrow">In your workflow</p>
-          <h2>Your files. Your tools. Your way.</h2>
-          <p class="lede">
-            Marmot stores every manuscript as a folder of plain Markdown
-            files. That means version control, cloud sync, and backups all
-            stay in your hands — using tools you already trust.
-          </p>
-        </header>
-        <div class="detail-shot__viewer">
-          <Screenshot
-            placeholderLabel="Manuscript on disk"
-            placeholderHint="Finder window showing the folder of .md files alongside the Marmot editor"
-            aspectRatio="21/9"
-            alt="Manuscript folder structure shown next to Marmot"
-          />
-        </div>
-      </div>
-    </section>
-
-    <Philosophy />
     <Comparison />
     <FAQ />
   </main>
@@ -133,16 +109,4 @@ import Footer from '../components/Footer.astro';
     }
   }
 
-  .detail-shot__inner {
-    max-width: var(--container-wide);
-  }
-
-  .detail-shot__header {
-    max-width: 44rem;
-    margin-bottom: var(--space-7);
-  }
-
-  .detail-shot__header h2 {
-    margin-bottom: var(--space-3);
-  }
 </style>
