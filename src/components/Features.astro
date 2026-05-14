@@ -1,0 +1,106 @@
+---
+const features = [
+  {
+    title: 'Distraction-free editor',
+    body: 'Just your manuscript and a blinking cursor. Optional focus mode dims everything but the sentence you are writing.',
+  },
+  {
+    title: 'Plain Markdown files',
+    body: 'Every manuscript is a folder of .md files on your Mac. Open them in any editor. Back them up however you like.',
+  },
+  {
+    title: 'Submission-ready PDFs',
+    body: 'One-click export in Shunn manuscript format — the industry standard for novel submissions to agents and publishers.',
+  },
+  {
+    title: 'A beautiful reader',
+    body: 'Switch to reader mode to see your prose typeset like a finished book. Find pacing problems before your editor does.',
+  },
+  {
+    title: 'Local-first, always',
+    body: 'No accounts. No cloud. No telemetry. Your manuscript never leaves your Mac unless you decide to send it somewhere.',
+  },
+  {
+    title: 'Works with your tools',
+    body: 'Use Git for revisions. Dropbox or iCloud for sync. Time Machine for backups. Marmot stays out of the way.',
+  },
+];
+---
+
+<section class="features section" id="features" aria-labelledby="features-heading">
+  <div class="container">
+    <header class="features__header">
+      <p class="eyebrow">Features</p>
+      <h2 id="features-heading">Built for the long form.</h2>
+      <p class="lede">
+        Marmot does a small number of things, and tries to do them very well.
+      </p>
+    </header>
+
+    <ul class="features__grid" role="list">
+      {features.map((feature) => (
+        <li class="feature-card">
+          <div class="feature-card__mark" aria-hidden="true"></div>
+          <h3 class="feature-card__title">{feature.title}</h3>
+          <p class="feature-card__body">{feature.body}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .features__header {
+    max-width: var(--measure);
+    margin-bottom: var(--space-7);
+  }
+
+  .features__header h2 {
+    margin-bottom: var(--space-3);
+  }
+
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: var(--paper);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-height: 14rem;
+  }
+
+  .feature-card__mark {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .feature-card__title {
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .feature-card__body {
+    color: var(--muted);
+    font-size: var(--step-0);
+    line-height: 1.55;
+    max-width: none;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+interface Props {
+  variant?: 'icon' | 'wordmark';
+  gradient?: boolean;
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const {
+  variant = 'wordmark',
+  gradient = false,
+  width,
+  height,
+  class: className,
+} = Astro.props;
+
+const baseName = variant === 'icon' ? 'marmot-icon' : 'marmot-text-logo';
+const suffix = gradient ? '-gradient' : '';
+
+// In Flexoki naming, the "-dark" variants use dark ink (for light backgrounds)
+// and the "-light" variants use light ink (for dark backgrounds).
+const lightSrc = `/logos/${baseName}-dark${suffix}.svg`;
+const darkSrc = `/logos/${baseName}-light${suffix}.svg`;
+
+const aspect = variant === 'icon' ? 1 : 1920 / 400;
+const resolvedWidth = width ?? (variant === 'icon' ? 64 : 200);
+const resolvedHeight = height ?? Math.round(resolvedWidth / aspect);
+---
+
+<picture class={className}>
+  <source srcset={darkSrc} media="(prefers-color-scheme: dark)" />
+  <img
+    src={lightSrc}
+    alt="Marmot"
+    width={resolvedWidth}
+    height={resolvedHeight}
+    loading="eager"
+    decoding="async"
+  />
+</picture>

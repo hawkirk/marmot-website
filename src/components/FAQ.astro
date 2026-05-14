@@ -1,0 +1,121 @@
+---
+const faqs = [
+  {
+    q: 'How much does Marmot cost?',
+    a: 'Marmot is a one-time purchase on the Mac App Store. No subscription. Pricing will be announced at launch.',
+  },
+  {
+    q: 'What are the system requirements?',
+    a: 'Marmot runs on macOS 14 Sonoma or later, on both Apple Silicon and Intel Macs. There is no iOS or iPad version yet.',
+  },
+  {
+    q: 'Where are my manuscripts stored?',
+    a: 'On your Mac, in a folder you choose. Each manuscript is a directory of plain Markdown (.md) files with an optional marmot.json manifest. You can open the same files in any Markdown editor or version-control system.',
+  },
+  {
+    q: 'Does Marmot sync between my devices?',
+    a: 'Marmot does not include built-in sync. By design — sync engines are a common source of data loss and frustration. Instead, put your manuscript folder in iCloud Drive, Dropbox, or a Git repository and let the tool you already trust handle it.',
+  },
+  {
+    q: 'Can I export to Word, ePub, or other formats?',
+    a: 'Version 1 ships with PDF export in Shunn manuscript format (the standard for submitting novels to agents and publishers). Other export formats are being considered for a future update.',
+  },
+  {
+    q: 'Does Marmot collect any data?',
+    a: 'No. Marmot has no analytics, no telemetry, no crash reporting service, and no account system. It does not make any network requests on your behalf.',
+  },
+  {
+    q: 'How do I report a bug or request a feature?',
+    a: 'Email hello@marmotmanuscript.com with what you saw and what you expected. Replies usually come within a day or two.',
+  },
+];
+---
+
+<section class="faq section" id="faq" aria-labelledby="faq-heading">
+  <div class="container faq__container">
+    <header class="faq__header">
+      <p class="eyebrow">Questions</p>
+      <h2 id="faq-heading">Things people ask.</h2>
+    </header>
+
+    <div class="faq__list">
+      {faqs.map((item) => (
+        <details class="faq__item">
+          <summary class="faq__summary">
+            <span>{item.q}</span>
+            <svg class="faq__chevron" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__answer">
+            <p>{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__container {
+    max-width: 48rem;
+  }
+
+  .faq__header {
+    margin-bottom: var(--space-6);
+  }
+
+  .faq__list {
+    border-top: 1px solid var(--rule);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .faq__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-1);
+    cursor: pointer;
+    font-size: var(--step-1);
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    list-style: none;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .faq__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__summary:hover {
+    color: var(--accent);
+  }
+
+  .faq__chevron {
+    flex-shrink: 0;
+    color: var(--muted);
+    transition: transform var(--duration) var(--ease),
+                color var(--duration) var(--ease);
+  }
+
+  .faq__item[open] .faq__chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  .faq__answer {
+    padding: 0 var(--space-1) var(--space-5);
+    color: var(--muted);
+  }
+
+  .faq__answer p {
+    font-size: var(--step-0);
+    line-height: 1.6;
+    max-width: var(--measure);
+  }
+</style>

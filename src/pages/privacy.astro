@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import Logo from '../components/Logo.astro';
+
+const lastUpdated = 'May 13, 2026';
+const supportEmail = 'hello@marmotmanuscript.com';
+---
+
+<BaseLayout
+  title="Privacy — Marmot"
+  description="Marmot collects no personal data, runs no analytics, and makes no network requests on your behalf."
+>
+  <main id="main">
+    <header class="page-header section--tight">
+      <div class="container page-header__inner">
+        <a href="/" class="page-header__brand" aria-label="Marmot home">
+          <Logo variant="wordmark" width={140} height={30} />
+        </a>
+      </div>
+    </header>
+
+    <article class="legal section">
+      <div class="container legal__inner">
+        <p class="eyebrow">Privacy</p>
+        <h1>Marmot collects nothing.</h1>
+        <p class="legal__meta">Last updated {lastUpdated}</p>
+
+        <div class="prose">
+          <p>
+            Marmot is a Mac app for writing novels. It runs locally on your
+            computer. It does not have an account system, an analytics
+            service, or a crash-reporting backend. It does not make network
+            requests to us or to any third party as part of its normal
+            operation.
+          </p>
+
+          <h2>What Marmot stores</h2>
+          <p>
+            Your manuscripts are saved as plain Markdown files on your Mac, in
+            a folder you choose. Marmot also writes small preference files
+            (window size, recently opened documents, editor settings) to the
+            standard macOS preferences location. None of this leaves your Mac.
+          </p>
+
+          <h2>What Marmot does not do</h2>
+          <ul>
+            <li>No telemetry or usage analytics of any kind.</li>
+            <li>No third-party SDKs that collect data.</li>
+            <li>No advertising. No tracking. No fingerprinting.</li>
+            <li>No automatic cloud sync. (You can put your manuscript folder in iCloud, Dropbox, or Git on your own; Marmot itself does not.)</li>
+          </ul>
+
+          <h2>This website</h2>
+          <p>
+            <strong>marmotmanuscript.com</strong> is a static site hosted on
+            GitHub Pages. It has no cookies, no analytics, and no third-party
+            scripts. The Inter typeface is served from the same domain as the
+            site, so no font CDN is involved.
+          </p>
+
+          <h2>Contact</h2>
+          <p>
+            If you have questions about this policy or anything else about
+            Marmot, email <a href={`mailto:${supportEmail}`}>{supportEmail}</a>.
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-header {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-header__inner {
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-4);
+  }
+
+  .page-header__brand {
+    text-decoration: none;
+  }
+
+  .legal__inner {
+    max-width: 42rem;
+  }
+
+  .legal h1 {
+    font-size: var(--step-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal__meta {
+    color: var(--muted);
+    font-size: var(--step--1);
+    margin-bottom: var(--space-6);
+  }
+
+  .prose h2 {
+    font-size: var(--step-1);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .prose p,
+  .prose ul {
+    color: var(--ink);
+    font-size: var(--step-0);
+    line-height: 1.65;
+    max-width: var(--measure);
+  }
+
+  .prose p + p {
+    margin-top: var(--space-4);
+  }
+
+  .prose ul {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .prose ul li::marker {
+    color: var(--accent);
+  }
+</style>

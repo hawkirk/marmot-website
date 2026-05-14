@@ -1,0 +1,91 @@
+/* ----------------------------------------------------------------------------
+ * Flexoki color palette by Steph Ango — https://stephango.com/flexoki
+ * Licensed under MIT. Light/dark via prefers-color-scheme.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light dark;
+
+  /* Surface */
+  --paper: #FFFCF0;
+  --ink: #100F0F;
+  --muted: #6F6E69;
+  --muted-soft: #B7B5AC;
+  --rule: #DAD8CE;
+  --rule-soft: #E6E4D9;
+  --surface-sunken: #F2F0E5;
+  --surface-raised: #FFFCF0;
+
+  /* Accents */
+  --accent: #DA702C;        /* orange-600 */
+  --accent-hover: #BC5215;  /* orange-700 */
+  --link: #205EA6;          /* blue-600 */
+  --link-hover: #24837B;    /* cyan-600 */
+  --check: #66800B;         /* green-600 */
+  --cross: #AF3029;         /* red-600 */
+
+  /* Type scale (fluid, Major Third 1.250) */
+  --step--1: clamp(0.875rem, 0.86rem + 0.06vw, 0.9375rem);
+  --step-0:  1.0625rem;                                       /* 17px body */
+  --step-1:  clamp(1.25rem, 1.18rem + 0.32vw, 1.5rem);
+  --step-2:  clamp(1.5rem,  1.36rem + 0.66vw, 2rem);
+  --step-3:  clamp(1.875rem, 1.66rem + 1.04vw, 2.625rem);
+  --step-4:  clamp(2.5rem,  2.05rem + 2.24vw, 4.125rem);
+
+  /* Rhythm */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.5rem;
+  --space-6:  2rem;
+  --space-7:  3rem;
+  --space-8:  4rem;
+  --space-9:  6rem;
+  --space-10: 8rem;
+
+  /* Layout */
+  --measure: 38rem;       /* readable prose width */
+  --container: 68rem;     /* page container */
+  --container-wide: 80rem;
+
+  --radius:    4px;
+  --radius-lg: 12px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --duration: 200ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #100F0F;
+    --ink: #CECDC3;
+    --muted: #878580;
+    --muted-soft: #575653;
+    --rule: #282726;
+    --rule-soft: #1C1B1A;
+    --surface-sunken: #1C1B1A;
+    --surface-raised: #282726;
+
+    --accent: #DA702C;
+    --accent-hover: #E8875D;  /* orange-400 */
+    --link: #4385BE;          /* blue-400 */
+    --link-hover: #3AA99F;    /* cyan-400 */
+    --check: #879A39;         /* green-400 */
+    --cross: #D14D41;         /* red-400 */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration: 0ms;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

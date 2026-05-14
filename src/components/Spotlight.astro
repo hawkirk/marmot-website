@@ -1,0 +1,143 @@
+---
+import Screenshot from './Screenshot.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  body: string;
+  bullets?: string[];
+  src?: string;
+  alt?: string;
+  windowTitle?: string;
+  imageSide?: 'left' | 'right';
+  background?: 'paper' | 'sunken';
+  placeholderLabel?: string;
+  placeholderHint?: string;
+  aspectRatio?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  body,
+  bullets = [],
+  src,
+  alt,
+  windowTitle,
+  imageSide = 'right',
+  background = 'paper',
+  placeholderLabel,
+  placeholderHint,
+  aspectRatio,
+} = Astro.props;
+
+const headingId = `spotlight-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}`;
+---
+
+<section
+  class:list={['spotlight', 'section', `spotlight--image-${imageSide}`, `spotlight--${background}`]}
+  aria-labelledby={headingId}
+>
+  <div class="container spotlight__grid">
+    <div class="spotlight__text">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h2 id={headingId} class="spotlight__title">{title}</h2>
+      <p class="spotlight__body">{body}</p>
+      {bullets.length > 0 && (
+        <ul class="spotlight__bullets" role="list">
+          {bullets.map((item) => <li>{item}</li>)}
+        </ul>
+      )}
+    </div>
+    <div class="spotlight__image">
+      <Screenshot
+        src={src}
+        alt={alt}
+        windowTitle={windowTitle}
+        placeholderLabel={placeholderLabel}
+        placeholderHint={placeholderHint}
+        aspectRatio={aspectRatio}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .spotlight {
+    overflow: hidden; /* contain the shadow under the window */
+  }
+
+  .spotlight--sunken {
+    background: var(--surface-sunken);
+    border-block: 1px solid var(--rule);
+  }
+
+  .spotlight__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  @media (min-width: 56rem) {
+    .spotlight__grid {
+      grid-template-columns: 5fr 7fr;
+      gap: var(--space-8);
+    }
+
+    .spotlight--image-left .spotlight__image {
+      order: -1;
+    }
+
+    .spotlight--image-left .spotlight__text {
+      padding-left: var(--space-3);
+    }
+  }
+
+  .spotlight__text {
+    max-width: 32rem;
+  }
+
+  .spotlight__title {
+    font-size: var(--step-3);
+    margin-bottom: var(--space-4);
+    max-width: 18ch;
+  }
+
+  .spotlight__body {
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--muted);
+    margin-bottom: var(--space-5);
+    max-width: var(--measure);
+  }
+
+  .spotlight__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .spotlight__bullets li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--ink);
+    font-size: var(--step-0);
+    line-height: 1.5;
+    max-width: var(--measure);
+  }
+
+  .spotlight__bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+</style>

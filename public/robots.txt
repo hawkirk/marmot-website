@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marmotmanuscript.com/sitemap-index.xml

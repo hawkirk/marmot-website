@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Screenshot from '../components/Screenshot.astro';
+import Spotlight from '../components/Spotlight.astro';
+import Features from '../components/Features.astro';
+import Philosophy from '../components/Philosophy.astro';
+import Comparison from '../components/Comparison.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <main id="main">
+    <Hero />
+
+    <section class="hero-shot">
+      <div class="hero-shot__inner">
+        <Screenshot
+          windowTitle="Untitled Manuscript — Marmot"
+          placeholderLabel="The editor at work"
+          placeholderHint="Drop your hero screenshot here · 2560 × 1600 recommended"
+          aspectRatio="16/10"
+          alt="Marmot editor showing a manuscript in progress"
+        />
+      </div>
+    </section>
+
+    <Spotlight
+      eyebrow="Write"
+      title="Just text. Just you."
+      body="Marmot's editor is built for the kind of attention long-form writing demands. Inline syntax markers, no toolbars, no chrome — just your prose."
+      bullets={[
+        'Optional focus mode dims everything but the sentence you are writing.',
+        'Smart typography handles em-dashes, smart quotes, and ellipses as you type.',
+        'Native NSTextView under the hood — no input lag at chapter or novel length.',
+      ]}
+      windowTitle="chapter-03.md — Marmot"
+      placeholderLabel="Editor view"
+      placeholderHint="Focus mode active — show one paragraph dimmed, the active sentence lit"
+      imageSide="right"
+    />
+
+    <Spotlight
+      eyebrow="Read"
+      title="See your prose like a finished book."
+      body="Switch to reader mode any time to see your manuscript typeset like the printed page. Pacing problems and dense paragraphs surface before your editor finds them."
+      bullets={[
+        'Beautiful typographic defaults — serif, generous leading, balanced measure.',
+        'Skim whole chapters or zoom in on a single page.',
+        'Search and navigate without leaving the typeset view.',
+      ]}
+      windowTitle="Chapter Three — Reader Mode"
+      placeholderLabel="Reader / preview"
+      placeholderHint="Typeset chapter view — show two columns or a single page mock"
+      imageSide="left"
+      background="sunken"
+    />
+
+    <Spotlight
+      eyebrow="Send"
+      title="Submission-ready, instantly."
+      body="When the book is done, Marmot exports a clean Shunn-formatted PDF — the standard for novel submissions to agents and publishers. One click. No formatting headaches."
+      bullets={[
+        'Title page, headers, page numbers — all formatted to Shunn spec.',
+        'Courier or Times New Roman, your choice. Both are accepted by editors.',
+        'Export individual chapters or the entire manuscript as one PDF.',
+      ]}
+      windowTitle="Compile — Shunn Manuscript Format"
+      placeholderLabel="Compile / export"
+      placeholderHint="Compile dialog with PDF preview alongside"
+      imageSide="right"
+    />
+
+    <Features />
+
+    <section class="detail-shot section--tight">
+      <div class="container detail-shot__inner">
+        <header class="detail-shot__header">
+          <p class="eyebrow">In your workflow</p>
+          <h2>Your files. Your tools. Your way.</h2>
+          <p class="lede">
+            Marmot stores every manuscript as a folder of plain Markdown
+            files. That means version control, cloud sync, and backups all
+            stay in your hands — using tools you already trust.
+          </p>
+        </header>
+        <div class="detail-shot__viewer">
+          <Screenshot
+            windowTitle="~/Manuscripts/the-northern-light"
+            placeholderLabel="Manuscript on disk"
+            placeholderHint="Finder window showing the folder of .md files alongside the Marmot editor"
+            aspectRatio="21/9"
+            alt="Manuscript folder structure shown next to Marmot"
+          />
+        </div>
+      </div>
+    </section>
+
+    <Philosophy />
+    <Comparison />
+    <FAQ />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero-shot {
+    padding-top: var(--space-4);
+    padding-bottom: clamp(var(--space-7), 8vw, var(--space-9));
+    position: relative;
+  }
+
+  .hero-shot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      color-mix(in srgb, var(--surface-sunken) 40%, transparent)
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero-shot__inner {
+    width: 100%;
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    padding-inline: var(--space-5);
+  }
+
+  @media (min-width: 48rem) {
+    .hero-shot__inner {
+      padding-inline: var(--space-6);
+    }
+  }
+
+  .detail-shot__inner {
+    max-width: var(--container-wide);
+  }
+
+  .detail-shot__header {
+    max-width: 44rem;
+    margin-bottom: var(--space-7);
+  }
+
+  .detail-shot__header h2 {
+    margin-bottom: var(--space-3);
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+const supportEmail = 'hello@marmotmanuscript.com';
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <Logo variant="wordmark" width={140} height={30} class="footer__logo" />
+      <p class="footer__tagline">A quiet place to write your novel.</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer">
+      <div class="footer__nav-group">
+        <p class="footer__nav-heading">Product</p>
+        <ul role="list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__nav-group">
+        <p class="footer__nav-heading">Support</p>
+        <ul role="list">
+          <li><a href={`mailto:${supportEmail}`}>Email support</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container footer__base">
+    <p class="footer__copy">© {year} Marmot. Made on a Mac.</p>
+    <p class="footer__copy">
+      Mac App Store and the Apple logo are trademarks of Apple Inc.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--rule);
+    background: var(--surface-sunken);
+    padding-block: var(--space-7) var(--space-5);
+    margin-top: var(--space-7);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  @media (min-width: 48rem) {
+    .footer__inner {
+      grid-template-columns: 1fr auto;
+      align-items: start;
+    }
+  }
+
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer__logo {
+    width: 140px;
+    height: auto;
+  }
+
+  .footer__tagline {
+    color: var(--muted);
+    font-size: var(--step--1);
+    max-width: none;
+  }
+
+  .footer__nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 48rem) {
+    .footer__nav {
+      gap: var(--space-8);
+    }
+  }
+
+  .footer__nav-heading {
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+    max-width: none;
+  }
+
+  .footer__nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer__nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: var(--step-0);
+    transition: color var(--duration) var(--ease);
+  }
+
+  .footer__nav a:hover {
+    color: var(--accent);
+  }
+
+  .footer__base {
+    padding-top: var(--space-5);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    justify-content: space-between;
+  }
+
+  .footer__copy {
+    color: var(--muted);
+    font-size: var(--step--1);
+    max-width: none;
+  }
+</style>
