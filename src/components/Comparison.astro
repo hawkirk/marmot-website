@@ -1,84 +1,75 @@
 ---
-type Cell = boolean | string | null;
-
 interface Row {
-  feature: string;
-  marmot: Cell;
-  other_apps: Cell;
+  marmot: string;
+  otherApps: string;
 }
 
-// Placeholder content — edit these rows freely.
 const rows: Row[] = [
-  { feature: 'Files stored as plain Markdown',     marmot: true,  other_apps: false  },
-  { feature: 'No account or sign-in required',     marmot: true,  other_apps: false  },
-  { feature: 'Works fully offline',                marmot: true,  other_apps: true  },
-  { feature: 'One-time purchase (no subscription)',marmot: true,  other_apps: false  },
-  { feature: 'Shunn manuscript PDF export',        marmot: true,  other_apps: false },
-  { feature: 'Built specifically for novels',      marmot: true,  other_apps: false },
-  { feature: 'Native macOS app (not Electron)',    marmot: true,  other_apps: true  },
-  { feature: 'Zero telemetry',                     marmot: true,  other_apps: false },
+  {
+    marmot: 'Your novel lives in plain Markdown files — open it in any editor, anywhere.',
+    otherApps: 'Your work is locked in a proprietary database or filetype. If the app goes, so does your access.',
+  },
+  {
+    marmot: 'One-time purchase. Buy once, own forever.',
+    otherApps: 'Indefinite monthly or annual subscription.',
+  },
+  {
+    marmot: 'Purpose-built for novelists writing long-form fiction.',
+    otherApps: "General-purpose writing apps, or apps with features you don't need to complete your manuscript.",
+  },
+  {
+    marmot: 'No accounts. No telemetry. Your files stay on your Mac.',
+    otherApps: 'Many writing tools require a cloud account; some collect usage data.',
+  },
 ];
-
-const apps = [
-  { key: 'marmot',    name: 'Marmot',     highlight: true  },
-  { key: 'other_apps',   name: 'Other Apps',    highlight: false },
-] as const;
-
-function renderCell(value: Cell): { symbol: string; label: string; tone: 'yes' | 'no' | 'neutral' } {
-  if (value === true)  return { symbol: '✓', label: 'Yes',         tone: 'yes' };
-  if (value === false) return { symbol: '—', label: 'No',          tone: 'no' };
-  if (value === null)  return { symbol: '·', label: 'Unspecified', tone: 'neutral' };
-  return { symbol: value, label: value, tone: 'neutral' };
-}
 ---
 
-<section class="comparison section" aria-labelledby="comparison-heading">
+<section id="comparison" class="comparison section" aria-labelledby="comparison-heading">
   <div class="container">
     <header class="comparison__header">
-      <p class="eyebrow">Compared</p>
-      <h2 id="comparison-heading">A different shape of writing app.</h2>
+      <p id="comparison-heading" class="eyebrow">Why Marmot</p>
       <p class="lede">
-        Marmot is opinionated. Here is how it lines up against the other Mac
-        writing apps you might be considering. Cells you can edit live in
-        <code>src/components/Comparison.astro</code>.
+        Most writing apps weren't built for novelists. Here is how Marmot is different.
       </p>
     </header>
 
-    <div class="comparison__scroll" role="region" tabindex="0" aria-label="Feature comparison table">
-      <table class="comparison__table">
-        <caption class="sr-only">Marmot compared with Ulysses, Scrivener, and iA Writer</caption>
+    <div class="comparison__wrap">
+      <table class="comparison__table" aria-describedby="comparison-footnote">
         <thead>
           <tr>
-            <th scope="col" class="comparison__feature-col">Feature</th>
-            {apps.map((app) => (
-              <th scope="col" class:list={['comparison__app-col', { 'is-highlight': app.highlight }]}>
-                {app.name}
-              </th>
-            ))}
+            <th scope="col" class="comparison__th comparison__th--marmot">Marmot</th>
+            <th scope="col" class="comparison__th comparison__th--other">Other apps</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((row) => (
             <tr>
-              <th scope="row" class="comparison__feature">{row.feature}</th>
-              {apps.map((app) => {
-                const cell = renderCell(row[app.key as keyof Row] as Cell);
-                return (
-                  <td class:list={['comparison__cell', `comparison__cell--${cell.tone}`, { 'is-highlight': app.highlight }]}>
-                    <span aria-hidden="true">{cell.symbol}</span>
-                    <span class="sr-only">{cell.label}</span>
-                  </td>
-                );
-              })}
+              <td class="comparison__td comparison__td--marmot">
+                <div class="comparison__cell">
+                  <svg class="comparison__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m5 12 5 5 9-11" />
+                  </svg>
+                  <span>{row.marmot}</span>
+                </div>
+              </td>
+              <td class="comparison__td comparison__td--other">
+                <div class="comparison__cell">
+                  <svg class="comparison__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                  </svg>
+                  <span>{row.otherApps}</span>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
 
-    <p class="comparison__footnote">
-      Information about other apps reflects their publicly stated features at
-      the time of writing. Trademarks and product names belong to their owners.
+    <p id="comparison-footnote" class="comparison__footnote">
+      "Other apps" is a generalization across the writing tools novelists most
+      commonly choose between — any given app may differ on any given row.
+      Reflects publicly available information at the time of writing.
     </p>
   </div>
 </section>
@@ -89,105 +80,90 @@ function renderCell(value: Cell): { symbol: string; label: string; tone: 'yes' |
     max-width: 44rem;
   }
 
-  .comparison__header h2 {
-    margin-bottom: var(--space-3);
-  }
-
-  .comparison__header code {
-    background: var(--rule-soft);
-    color: var(--ink);
-    padding: 1px 6px;
-    border-radius: var(--radius);
-    font-size: 0.85em;
-    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
-  }
-
-  .comparison__scroll {
-    position: relative;
-    overflow-x: auto;
+  .comparison__wrap {
     border: 1px solid var(--rule);
     border-radius: var(--radius-lg);
+    overflow: hidden;
     background: var(--paper);
-    scrollbar-width: thin;
-  }
-
-  .comparison__scroll:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
   }
 
   .comparison__table {
     width: 100%;
-    min-width: 40rem;
-    border-collapse: collapse;
-    font-size: var(--step-0);
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
   }
 
-  .comparison__table thead {
-    background: var(--surface-sunken);
-  }
-
-  .comparison__table th,
-  .comparison__table td {
-    padding: var(--space-4) var(--space-5);
+  .comparison__th,
+  .comparison__td {
+    width: 50%;
     text-align: left;
+    vertical-align: top;
+    padding: var(--space-4) var(--space-5);
     border-bottom: 1px solid var(--rule);
   }
 
-  .comparison__table tbody tr:last-child th,
-  .comparison__table tbody tr:last-child td {
+  .comparison__table tbody tr:last-child .comparison__td {
     border-bottom: none;
   }
 
-  .comparison__feature-col {
-    font-weight: 500;
-    color: var(--muted);
+  .comparison__th {
     font-size: var(--step--1);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    width: 40%;
-  }
-
-  .comparison__app-col {
     font-weight: 600;
-    color: var(--ink);
-    text-align: center;
-    font-size: var(--step-0);
-    letter-spacing: -0.005em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-block: var(--space-3);
   }
 
-  .comparison__app-col.is-highlight {
+  .comparison__th--marmot,
+  .comparison__td--marmot {
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+  }
+
+  .comparison__th--marmot {
     color: var(--accent);
   }
 
-  .comparison__feature {
-    font-weight: 500;
+  .comparison__th--other,
+  .comparison__td--other {
+    background: var(--surface-sunken);
+  }
+
+  .comparison__th--other {
+    color: var(--muted);
+  }
+
+  .comparison__td--marmot {
     color: var(--ink);
-    letter-spacing: -0.005em;
+  }
+
+  .comparison__td--other {
+    color: var(--muted);
   }
 
   .comparison__cell {
-    text-align: center;
-    font-size: 1.125rem;
-    line-height: 1;
-    color: var(--muted);
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    font-size: var(--step-0);
+    line-height: 1.5;
   }
 
-  .comparison__cell--yes {
-    color: var(--check);
-    font-weight: 600;
+  .comparison__cell span {
+    max-width: none;
   }
 
-  .comparison__cell--no {
-    color: var(--muted-soft);
+  .comparison__icon {
+    flex-shrink: 0;
+    margin-top: 4px;
   }
 
-  .comparison__cell.is-highlight {
-    background: color-mix(in srgb, var(--accent) 6%, transparent);
-  }
-
-  .comparison__cell--yes.is-highlight {
+  .comparison__td--marmot .comparison__icon {
     color: var(--accent);
+  }
+
+  .comparison__td--other .comparison__icon {
+    color: var(--muted);
   }
 
   .comparison__footnote {
@@ -198,9 +174,20 @@ function renderCell(value: Cell): { symbol: string; label: string; tone: 'yes' |
   }
 
   @media (max-width: 36rem) {
-    .comparison__table th,
-    .comparison__table td {
+    .comparison__th,
+    .comparison__td {
       padding: var(--space-3) var(--space-4);
+    }
+
+    .comparison__cell {
+      font-size: var(--step--1);
+      gap: var(--space-2);
+    }
+
+    .comparison__icon {
+      width: 16px;
+      height: 16px;
+      margin-top: 3px;
     }
   }
 </style>

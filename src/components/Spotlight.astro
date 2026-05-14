@@ -15,6 +15,8 @@ interface Props {
   aspectRatio?: string;
   /** Give the image more space (image ~70% of width instead of ~58%). */
   wide?: boolean;
+  /** Stable anchor id for in-page links (e.g. "write" for href="#write"). */
+  id?: string;
 }
 
 const {
@@ -30,12 +32,14 @@ const {
   placeholderHint,
   aspectRatio,
   wide = false,
+  id,
 } = Astro.props;
 
 const headingId = `spotlight-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}`;
 ---
 
 <section
+  id={id}
   class:list={['spotlight', 'section', `spotlight--image-${imageSide}`, `spotlight--${background}`, wide && 'spotlight--wide']}
   aria-labelledby={headingId}
 >
