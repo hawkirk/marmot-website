@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title="Blog — Marmot"
+  description="Essays on long-form writing, plain text, and the craft of the novel."
+>
+  <main id="main">
+    <section class="posts">
+      <div class="container">
+        <h1 class="eyebrow posts__heading">Blog</h1>
+
+        {posts.length === 0 ? (
+          <p class="posts__empty">No posts yet. Drop a <code>.md</code> file into <code>src/content/blog/</code>.</p>
+        ) : (
+          <ul class="posts__list" role="list">
+            {posts.map((post) => (
+              <li class="post-card">
+                <a href={`/blog/${post.id}`} class="post-card__link">
+                  <time class="post-card__date" datetime={post.data.date.toISOString()}>
+                    {dateFormatter.format(post.data.date)}
+                  </time>
+                  <h2 class="post-card__title">{post.data.title}</h2>
+                  {post.data.description && (
+                    <p class="post-card__description">{post.data.description}</p>
+                  )}
+                  <span class="post-card__more" aria-hidden="true">Read →</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .posts {
+    padding-block: clamp(var(--space-7), 8vw, var(--space-9)) var(--space-8);
+  }
+
+  .posts__heading {
+    margin-bottom: var(--space-6);
+  }
+
+  .posts__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 48rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .post-card {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .post-card__link {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding-block: var(--space-5);
+    text-decoration: none;
+    color: var(--ink);
+    transition: color var(--duration) var(--ease);
+  }
+
+  @media (min-width: 48rem) {
+    .post-card__link {
+      grid-template-columns: 9rem 1fr auto;
+      column-gap: var(--space-6);
+      align-items: baseline;
+    }
+  }
+
+  .post-card__link:hover {
+    color: var(--accent);
+  }
+
+  .post-card__link:hover .post-card__title {
+    color: var(--accent);
+  }
+
+  .post-card__date {
+    color: var(--muted);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    max-width: none;
+  }
+
+  .post-card__title {
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    line-height: 1.25;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .post-card__description {
+    color: var(--muted);
+    font-size: var(--step-0);
+    line-height: 1.5;
+    grid-column: 2;
+  }
+
+  .post-card__more {
+    color: var(--muted);
+    font-size: var(--step--1);
+    font-weight: 500;
+    align-self: center;
+    justify-self: end;
+    max-width: none;
+  }
+
+  .post-card__link:hover .post-card__more {
+    color: var(--accent);
+  }
+
+  .posts__empty {
+    color: var(--muted);
+    text-align: center;
+    padding-block: var(--space-7);
+  }
+
+  .posts__empty code {
+    background: var(--rule-soft);
+    padding: 2px 6px;
+    border-radius: var(--radius);
+    font-size: 0.85em;
+  }
+</style>

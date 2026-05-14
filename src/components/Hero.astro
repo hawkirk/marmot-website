@@ -1,16 +1,10 @@
 ---
-import Logo from './Logo.astro';
 import AppStoreBadge from './AppStoreBadge.astro';
 ---
 
 <header class="hero">
   <div class="container hero__inner">
-    <h1 class="hero__heading">
-      <span class="sr-only">Marmot</span>
-      <Logo variant="wordmark" gradient={true} width={360} height={75} class="hero__wordmark" />
-    </h1>
-
-    <p class="hero__tagline">A quiet place to write your novel.</p>
+    <h1 class="hero__tagline">A quiet place to write your novel.</h1>
 
     <p class="hero__lede">
       Marmot is a minimalist Mac app for novelists. Plain Markdown files, a
@@ -19,7 +13,7 @@ import AppStoreBadge from './AppStoreBadge.astro';
     </p>
 
     <div class="hero__cta">
-      <AppStoreBadge comingSoon={true} />
+      <AppStoreBadge />
     </div>
 
     <p class="hero__meta">
@@ -57,24 +51,14 @@ import AppStoreBadge from './AppStoreBadge.astro';
     gap: var(--space-5);
   }
 
-  .hero__heading {
-    margin: 0;
-    line-height: 1;
-  }
-
-  .hero__wordmark {
-    width: clamp(260px, 38vw, 420px);
-    height: auto;
-  }
-
   .hero__tagline {
-    font-size: var(--step-3);
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.1;
+    font-size: var(--step-4);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
     color: var(--ink);
     max-width: 22ch;
-    margin-top: var(--space-3);
+    margin: 0;
     text-wrap: balance;
   }
 

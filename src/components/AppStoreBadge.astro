@@ -1,21 +1,16 @@
 ---
+import { APP_STORE } from '../data/site';
+
 interface Props {
   href?: string;
-  comingSoon?: boolean;
 }
 
-const { href = '#', comingSoon = true } = Astro.props;
+const { href = APP_STORE.url } = Astro.props;
 
-const label = comingSoon ? 'Coming Soon to the Mac App Store' : 'Download on the Mac App Store';
-const isPlaceholder = href === '#' || comingSoon;
+const label = 'Download on the Mac App Store';
 ---
 
-<a
-  class:list={['app-store-badge', { 'app-store-badge--placeholder': isPlaceholder }]}
-  href={href}
-  aria-label={label}
-  aria-disabled={isPlaceholder ? 'true' : undefined}
->
+<a class="app-store-badge" href={href} aria-label={label}>
   <svg
     class="app-store-badge__apple"
     viewBox="0 0 16 16"
@@ -30,7 +25,7 @@ const isPlaceholder = href === '#' || comingSoon;
     ></path>
   </svg>
   <span class="app-store-badge__text">
-    <span class="app-store-badge__caption">{comingSoon ? 'Coming Soon to the' : 'Download on the'}</span>
+    <span class="app-store-badge__caption">Download on the</span>
     <span class="app-store-badge__title">Mac App Store</span>
   </span>
 </a>
@@ -60,16 +55,6 @@ const isPlaceholder = href === '#' || comingSoon;
 
   .app-store-badge:focus-visible {
     outline-offset: 4px;
-  }
-
-  .app-store-badge--placeholder {
-    cursor: not-allowed;
-    opacity: 0.85;
-  }
-
-  .app-store-badge--placeholder:hover {
-    background: var(--ink);
-    transform: none;
   }
 
   .app-store-badge__apple {

@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import { Content, getHeadings } from '../data/guide.md';
+
+const allHeadings = getHeadings();
+const tocHeadings = allHeadings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<BaseLayout
+  title="Guide — Marmot"
+  description="How to install, set up, and write your novel in Marmot. A short, illustrated guide."
+>
+  <main id="main">
+    <header class="page-hero">
+      <div class="container page-hero__inner">
+        <p class="eyebrow">Guide</p>
+        <h1>How to write your novel in Marmot.</h1>
+        <p class="lede">
+          A short tour of the editor, reader mode, and the compile pipeline —
+          enough to take a manuscript from a blank file to a submission-ready
+          PDF.
+        </p>
+      </div>
+    </header>
+
+    <article class="guide">
+      <div class="guide__layout">
+        <aside class="guide__toc-wrap">
+          <nav class="guide__toc" aria-label="On this page">
+            <p class="guide__toc-heading">On this page</p>
+            <ol class="guide__toc-list" role="list">
+              {tocHeadings.map((h) => (
+                <li class:list={['guide__toc-item', `guide__toc-item--h${h.depth}`]}>
+                  <a href={`#${h.slug}`} data-toc-link={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="prose guide__body">
+          <Content />
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Scroll-spy: highlight the active section in the TOC as the user scrolls.
+  (function () {
+    const body = document.querySelector<HTMLElement>('.guide__body');
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]');
+    if (!body || tocLinks.length === 0) return;
+
+    const headings = Array.from(
+      body.querySelectorAll<HTMLElement>('h2[id], h3[id]'),
+    );
+    if (headings.length === 0) return;
+
+    let ticking = false;
+
+    function update() {
+      const refLine = 120; // px from top of viewport
+      let activeId = headings[0].id;
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top <= refLine) {
+          activeId = h.id;
+        } else {
+          break;
+        }
+      }
+
+      // If the page is at its maximum scroll position, the last heading may
+      // not have reached the refLine — without this override the previous
+      // section would stay highlighted.
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        activeId = headings[headings.length - 1].id;
+      }
+
+      for (const link of tocLinks) {
+        link.classList.toggle(
+          'is-active',
+          link.getAttribute('href') === `#${activeId}`,
+        );
+      }
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    document.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
+</script>
+
+<style>
+  .page-hero {
+    padding-block: clamp(var(--space-7), 8vw, var(--space-9)) var(--space-6);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-hero__inner {
+    max-width: 48rem;
+  }
+
+  .page-hero h1 {
+    font-size: var(--step-4);
+    margin-bottom: var(--space-4);
+    max-width: 18ch;
+  }
+
+  .guide {
+    padding-block: var(--space-7) 0;
+  }
+
+  .guide__layout {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--space-5);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 56rem) {
+    .guide__layout {
+      grid-template-columns: 14rem 1fr;
+      gap: var(--space-8);
+      padding-inline: var(--space-6);
+    }
+  }
+
+  /* On mobile, the TOC sits inline at the top of the page. */
+  .guide__toc-wrap {
+    background: var(--surface-sunken);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-5);
+  }
+
+  @media (min-width: 56rem) {
+    .guide__toc-wrap {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      position: sticky;
+      top: 5rem; /* below sticky navbar */
+      align-self: start;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+  }
+
+  .guide__toc-heading {
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+    max-width: none;
+  }
+
+  .guide__toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--rule);
+  }
+
+  .guide__toc-item a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: var(--step--1);
+    line-height: 1.4;
+    padding: 7px 14px;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+    transition: color var(--duration) var(--ease),
+                border-color var(--duration) var(--ease);
+  }
+
+  .guide__toc-item a:hover {
+    color: var(--ink);
+  }
+
+  .guide__toc-item a.is-active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .guide__toc-item--h3 a {
+    padding-left: 28px;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+
+  .guide__body {
+    max-width: 42rem;
+    min-width: 0; /* prevent grid blowout from long code/inline content */
+    /* Scroll buffer so the last section can be scrolled to the top of the
+       viewport when its anchor is clicked. Without this, clicking the final
+       TOC links does nothing because the page is already at its bottom. */
+    padding-bottom: 40vh;
+  }
+
+  .guide__body :global(h2:first-child) {
+    margin-top: 0;
+  }
+</style>

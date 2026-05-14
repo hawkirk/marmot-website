@@ -1,0 +1,152 @@
+---
+import Logo from './Logo.astro';
+import { APP_STORE, NAV_LINKS } from '../data/site';
+
+const downloadHref = APP_STORE.url;
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+---
+
+<nav class="nav" aria-label="Primary">
+  <div class="container nav__container">
+    <a href="/" class="nav__brand" aria-label={`${currentPath === '/' ? 'Marmot' : 'Marmot home'}`}>
+      <Logo variant="wordmark" width={120} height={25} class="nav__logo" />
+    </a>
+
+    <ul class="nav__links" role="list">
+      {NAV_LINKS.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={['nav__link', { 'is-current': isActive(link.href) }]}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href={downloadHref}
+          class="nav__download"
+          aria-label="Download from the Mac App Store"
+        >
+          Download
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 82%, transparent);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 12px;
+    gap: var(--space-5);
+  }
+
+  .nav__brand {
+    text-decoration: none;
+    line-height: 0;
+    flex-shrink: 0;
+    transition: opacity var(--duration) var(--ease);
+  }
+
+  .nav__brand:hover {
+    opacity: 0.8;
+  }
+
+  .nav__logo {
+    width: clamp(96px, 14vw, 120px);
+    height: auto;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(var(--space-2), 2vw, var(--space-4));
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav__link {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    padding: 8px 6px;
+    border-radius: var(--radius);
+    transition: color var(--duration) var(--ease);
+    white-space: nowrap;
+  }
+
+  .nav__link:hover {
+    color: var(--accent);
+  }
+
+  .nav__link.is-current {
+    color: var(--accent);
+  }
+
+  .nav__download {
+    color: var(--paper);
+    background: var(--ink);
+    text-decoration: none;
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background-color var(--duration) var(--ease),
+                transform var(--duration) var(--ease),
+                color var(--duration) var(--ease);
+    white-space: nowrap;
+    margin-left: var(--space-2);
+  }
+
+  .nav__download:hover {
+    background: var(--accent);
+    color: var(--paper);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 28rem) {
+    .nav__logo {
+      width: 84px;
+    }
+    .nav__link {
+      font-size: 13px;
+      padding: 6px 2px;
+    }
+    .nav__download {
+      padding: 6px 10px;
+      font-size: 13px;
+      margin-left: var(--space-1);
+    }
+    .nav__container {
+      gap: var(--space-2);
+    }
+    .nav__links {
+      gap: var(--space-2);
+    }
+  }
+</style>

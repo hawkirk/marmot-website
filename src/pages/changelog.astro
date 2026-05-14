@@ -1,0 +1,176 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+const entries = await getCollection('changelog');
+
+const sorted = entries.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const releases = await Promise.all(
+  sorted.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  }),
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+function anchorFor(version: string): string {
+  return `v${version.replace(/\./g, '-')}`;
+}
+---
+
+<BaseLayout
+  title="Changelog — Marmot"
+  description="Release notes and updates for Marmot, the minimalist macOS writing app for novelists."
+>
+  <main id="main">
+    <header class="page-hero">
+      <div class="container page-hero__inner">
+        <p class="eyebrow">Changelog</p>
+        <h1>What's new in Marmot.</h1>
+        <p class="lede">
+          Every release of Marmot, in reverse chronological order.
+        </p>
+      </div>
+    </header>
+
+    <section class="releases">
+      <div class="container">
+        {releases.length === 0 ? (
+          <p class="releases__empty">No releases yet.</p>
+        ) : (
+          <ol class="releases__list" role="list">
+            {releases.map(({ entry, Content }) => (
+              <li class="release" id={anchorFor(entry.data.version)}>
+                <header class="release__header">
+                  <div class="release__meta">
+                    <a class="release__version" href={`#${anchorFor(entry.data.version)}`}>
+                      <span class="release__version-prefix">v</span>{entry.data.version}
+                    </a>
+                    <time class="release__date" datetime={entry.data.date.toISOString()}>
+                      {dateFormatter.format(entry.data.date)}
+                    </time>
+                  </div>
+                  {entry.data.title && <h2 class="release__title">{entry.data.title}</h2>}
+                </header>
+                <div class="prose release__notes">
+                  <Content />
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: clamp(var(--space-7), 8vw, var(--space-9)) var(--space-6);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-hero__inner {
+    max-width: 48rem;
+  }
+
+  .page-hero h1 {
+    font-size: var(--step-4);
+    margin-bottom: var(--space-4);
+    max-width: 16ch;
+  }
+
+  .releases {
+    padding-block: var(--space-8);
+  }
+
+  .releases__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    max-width: 48rem;
+  }
+
+  .release {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 56rem) {
+    .release {
+      grid-template-columns: 12rem 1fr;
+      gap: var(--space-7);
+    }
+
+    .release__header {
+      position: sticky;
+      top: 5rem;
+      align-self: start;
+    }
+  }
+
+  .release__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .release__version {
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    max-width: none;
+  }
+
+  .release__version:hover {
+    color: var(--accent);
+  }
+
+  .release__version-prefix {
+    color: var(--muted);
+  }
+
+  .release__date {
+    font-size: var(--step--1);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    max-width: none;
+  }
+
+  .release__title {
+    font-size: var(--step-0);
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+  }
+
+  .release__notes h3:first-child {
+    margin-top: 0;
+  }
+
+  .releases__empty {
+    color: var(--muted);
+    text-align: center;
+    padding-block: var(--space-7);
+  }
+</style>
