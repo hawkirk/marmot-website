@@ -1,9 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+// SOCIAL is intentionally imported even though only Email is active —
+// re-enabling the commented-out entries below should not require a new import.
 import { SITE, SOCIAL } from '../data/site';
 
-const channels = [
+type Icon = 'email' | 'x' | 'bluesky' | 'reddit';
+
+interface Channel {
+  name: string;
+  handle: string;
+  href: string;
+  external: boolean;
+  icon: Icon;
+}
+
+const channels: Channel[] = [
   {
     name: 'Email',
     handle: SITE.supportEmail,
@@ -33,7 +45,7 @@ const channels = [
   //   external: true,
   //   icon: 'reddit',
   // },
-] as const;
+];
 ---
 
 <BaseLayout
