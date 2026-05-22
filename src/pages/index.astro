@@ -71,16 +71,33 @@ import Footer from '../components/Footer.astro';
       imageSide="right"
     />
 
+    <section id="goals" class="goals section" aria-labelledby="goals-heading">
+      <div class="container goals__inner">
+        <div class="goals__image goals__image--left">
+          <img
+            src="/screenshots/word-count-goals-left.png"
+            alt="Marmot's goals popover showing 15,693 of 100,000 manuscript words written and 24 of a 250-word daily target"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="goals__text">
+          <p class="eyebrow">Goals</p>
+          <h2 id="goals-heading" class="goals__title">Stay on pace.</h2>
+          <p class="goals__body">Set a manuscript word count and a daily target to track your progress at a glance.</p>
+        </div>
+      </div>
+    </section>
+
     <Spotlight
       id="themes"
       eyebrow="Themes"
       title="Make it yours."
-      body="Marmot ships with 15 carefully crafted light and dark themes, and has a built-in theme editor to customize as you see fit."
+      body="Marmot ships with 15 carefully crafted light and dark themes, and has a built-in theme editor for customization."
       src="/screenshots/themes-transparent-background.png"
       alt="Marmot's theme editor showing typography and color customization controls"
       aspectRatio="2880/1800"
       imageSide="left"
-      background="sunken"
     />
 
     <Features />
@@ -92,6 +109,53 @@ import Footer from '../components/Footer.astro';
 </BaseLayout>
 
 <style>
+  .goals {
+    background: var(--surface-sunken);
+    border-block: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .goals__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .goals__text {
+    max-width: 32rem;
+  }
+
+  .goals__title {
+    font-size: var(--step-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .goals__body {
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+
+  .goals__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .goals__image--left img {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 1.25rem);
+    mask-image: linear-gradient(to right, transparent 0, #000 1.25rem);
+  }
+
+  @media (min-width: 56rem) {
+    .goals__inner {
+      grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
   .hero-shot {
     padding-top: var(--space-4);
     padding-bottom: clamp(var(--space-7), 8vw, var(--space-9));
