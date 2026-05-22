@@ -8,7 +8,7 @@ export const SITE = {
   url: 'https://marmotmanuscript.com',
   tagline: 'Write your novel in pure markdown.',
   description:
-    'A minimalist macOS app for writing novels. Plain Markdown files, distraction-free editor, one-click submission-ready PDFs in Shunn manuscript format.',
+    'A minimalist macOS app for writing novels. Plain Markdown files, distraction-free editor, one-click submission-ready manuscript PDFs.',
   supportEmail: 'hello@marmotmanuscript.com',
 } as const;
 

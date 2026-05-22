@@ -28,7 +28,7 @@ Press <kbd>⌘R</kbd> again to return to the editor.
 
 ## Compiling for submission
 
-When you're ready to send your manuscript to an agent or publisher, use **File → Compile…** (<kbd>⌘⇧E</kbd>). Marmot produces a PDF in **Shunn manuscript format**, the industry standard for novel submissions.
+When you're ready to send your manuscript to an agent or publisher, use **File → Compile…** (<kbd>⌘⇧E</kbd>). Marmot produces a PDF in the **industry-standard manuscript format** used for novel submissions.
 
 The Compile dialog offers a small number of choices:
 

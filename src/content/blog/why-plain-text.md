@@ -25,7 +25,7 @@ The cost is small. Markdown is not as fancy as Word, but it can describe a novel
 Plain text is the floor. The reason Marmot exists, and not just `vim ~/Manuscripts/`, is that long-form fiction has a few real needs that don't fit a pure text editor:
 
 - A **reader mode** that typesets your prose so you can see how it reads on the page, not on a screen.
-- A **compile step** that produces a properly-formatted Shunn PDF you can send to an agent without spending an afternoon in InDesign.
+- A **compile step** that produces a properly-formatted manuscript PDF you can send to an agent without spending an afternoon in InDesign.
 - A focused **writing surface** that doesn't tempt you with toolbars while you're trying to find a sentence.
 
 That's the entire pitch. Everything else — sync, collaboration, AI co-authors — Marmot deliberately leaves to other tools, or to nobody at all.
