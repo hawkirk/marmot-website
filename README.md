@@ -1,4 +1,4 @@
-# marmotmanuscript.com
+# [marmotmanuscript.com](https://marmotmanuscript.com/)
 
 Marketing / help website for Marmot.
 
