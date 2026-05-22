@@ -123,6 +123,14 @@ import Footer from '../components/Footer.astro';
     align-items: center;
   }
 
+  .goals__image {
+    order: 2;
+  }
+
+  .goals__text {
+    order: 1;
+  }
+
   .goals__text {
     max-width: 32rem;
   }
@@ -154,6 +162,14 @@ import Footer from '../components/Footer.astro';
     .goals__inner {
       grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
       gap: var(--space-6);
+    }
+
+    .goals__image {
+      order: 0;
+    }
+
+    .goals__text {
+      order: 0;
     }
   }
 
