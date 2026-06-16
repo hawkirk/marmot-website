@@ -14,10 +14,9 @@ export const SITE = {
 
 export const APP_STORE = {
   /**
-   * Mac App Store URL. Currently a dead link — paste the real URL here once
-   * the listing is live. The nav button and hero badge both read this.
+   * Mac App Store URL. The nav button and hero badge both read this.
    */
-  url: '#',
+  url: 'https://apps.apple.com/us/app/marmot-manuscript-writing-app/id6769186525',
 } as const;
 
 export const NAV_LINKS = [
